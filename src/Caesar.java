@@ -1,33 +1,45 @@
-public class Caeser extends Cipher
-{
-    public Caeser(String s)
-    {
+public class Caeser extends Cipher {
+    public Caeser(String s) {
         super(s);
     }
-    public String encode(String word)
-    {
-        return code(word,Constants.ENCODE_SHIFT );
+
+    public interface Constants {
+        int WRAP_AROUND = 26;
+        int ENCODE_SHIFT = 3;
+        int DECODE_SHIFT = 23;
     }
-    public String decode(String word)
-    {
-        // Complete this method so that it decodes the encoded string
+
+    public String encode(String word) {
+        return code(word, Constants.ENCODE_SHIFT);
     }
-    String code(String word, int SHIFT)
-    {
+
+    public String decode(String word) {
+
+        return code(word, -Constants.ENCODE_SHIFT);
+
+    }
+
+    String code(String word, int SHIFT) {
         StringBuffer result = new StringBuffer();
-        for (int i = 0; i < word.length(); i++)
-        {
+        for (int i = 0; i < word.length(); i++) {
+
             char ch = word.charAt(i);
             ch = determineCharacter(ch, SHIFT);
             result.append(ch);
+
         }
         return result.toString();
     }
-    public char determineCharacter(char ch, final int shift)
-    {
-        if(Character.isUpperCase(ch))
-            ch = (char)('A' + (ch - 'A' + shift) % Constants.WRAP_AROUND);
-// Complete the if/else so that lower case letters are accounted for
+
+    public char determineCharacter(char ch, final int shift) {
+
+        if (Character.isUpperCase(ch)) {
+
+            ch = (char) ('A' + (ch - 'A' + shift + Constants.WRAP_AROUND) % Constants.WRAP_AROUND);
+        } else if (Character.isLowerCase(ch)) {
+
+            ch = (char) ('a' + (ch - 'a' + shift + Constants.WRAP_AROUND) % Constants.WRAP_AROUND);
+        }
         return ch;
     }
 }
