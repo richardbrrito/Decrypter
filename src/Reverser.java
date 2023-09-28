@@ -1,15 +1,14 @@
-public class Reverser extends Transpose
-{
-    public Reverser(String s)
-    {
-// Complete the constructor
+public class Reverser extends Transpose {
+
+    public Reverser(String s) {
+        super(s);
     }
-    public String reverseText(String word)
-    {
-        // Complete this method so that it reverses the original string
+
+    public String reverseText(String word) {
+        return super.encode(word);
     }
-    public String decode(String word)
-    {
-        // Complete this method so that it reverses the reversed string
+
+    public String decode(String word) {
+        return super.decode(word);
     }
 }
